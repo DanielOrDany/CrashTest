@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Menu from './components/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
@@ -41,7 +40,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-               <Menu />
+               works
             </div>
         );
     }
