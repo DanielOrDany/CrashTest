@@ -20,6 +20,16 @@ export const
                 resolve(result.data);
             });
         });
+    },
+
+    getAllDatabase = async () => {
+        console.log(ipcRenderer);
+        return new Promise(resolve => {
+            ipcRenderer.send(channels.GET_DATABASE);
+            ipcRenderer.on(channels.GET_DATABASE, (event, result) => {
+                resolve(result.data);
+            });
+        });
     }
 
 ; //END

@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const { channels } = require('../src/shared/constants');
 const { autoUpdater } = require('electron-updater');
 const Auth = require('./services/auth');
+const Database = require('./services/database');
 const path = require('path');
 const url = require('url');
 
@@ -47,7 +48,7 @@ function createWindow () {
 
   // Set/Remove devtools
   mainWindow.webContents.on("devtools-opened", () => {
-      mainWindow.closeDevTools();
+      // mainWindow.closeDevTools();
   });
 
   // Set/Remove MENU
@@ -113,5 +114,20 @@ ipcMain.on(channels.AUTH_VERIFY_TOKEN, async (event, id, token) => {
   } catch (e) {
     unsuccessful.message = e;
     await event.sender.send(channels.AUTH_VERIFY_TOKEN, unsuccessful);
+  }
+});
+
+/**
+ *  TEST
+ */
+
+ipcMain.on(channels.GET_DATABASE, async (event) => {
+  try {
+    const result = await Database.getDataFromDatabase();
+    successful.data = result;
+    await event.sender.send(channels.GET_DATABASE, successful);
+  } catch (e) {
+    unsuccessful.message = e;
+    await event.sender.send(channels.GET_DATABASE, unsuccessful);
   }
 });

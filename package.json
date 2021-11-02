@@ -20,6 +20,7 @@
     "json-update": "^5.3.0",
     "leader-line": "^1.0.5",
     "lodash": "^4.17.21",
+    "lowdb": "^1.0.0",
     "material-design-icons": "^3.0.1",
     "node-sass": "^4.14.1",
     "pretty-checkbox": "^3.0.3",
@@ -64,11 +65,13 @@
     "deploy-win": "npm run build && npm run build-electron-win && npm run package-win"
   },
   "build": {
-    "publish": [{
-      "provider": "github",
-      "owner": "DanielOrDany",
-      "repo": "CrashTest"
-    }],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "DanielOrDany",
+        "repo": "CrashTest"
+      }
+    ],
     "appId": "crash-test",
     "productName": "CrashTest",
     "copyright": "Copyright © 2020 CrashTest",

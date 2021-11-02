@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { getAllDatabase } from './methods';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
@@ -15,6 +16,9 @@ class App extends React.Component {
       let body = document.getElementsByTagName("body");
       const theme = localStorage.getItem("theme");
       const currentConnection = JSON.parse(localStorage.getItem("current_connection"));
+      const dataBase = await getAllDatabase();
+
+      console.log("dataBase", dataBase);
 
       if (currentConnection) {
           if (!navigator.onLine) {
@@ -40,7 +44,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-               works
+               works 1
             </div>
         );
     }
