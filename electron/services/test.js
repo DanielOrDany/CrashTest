@@ -45,7 +45,19 @@ async function createNewTest(name) {
     return tests;
 }
 
-// Export database's methods
+async function updateTest(id, newName) {}
+
+async function deleteTest(id) {}
+
+async function findTestByID(id) {}
+
+async function getAllTests() {}
+
+// Export test methods
 module.exports = {
-    createNewTest
+    createNewTest,
+    updateTest,
+    deleteTest,
+    findTestByID,
+    getAllTests
 };
