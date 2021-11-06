@@ -40,7 +40,10 @@ class App extends React.Component {
                         {
                             tests && tests.map(test => {
                                return (
-                                   <div>{test.name}</div>
+                                   <div>
+                                       <div>{test.name}</div>
+                                       <div>{test.ip}</div>
+                                   </div>
                                );
                             })
                         }
