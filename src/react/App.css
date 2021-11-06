@@ -55,3 +55,20 @@
     transform: rotate(360deg);
   }
 }
+
+header {
+  height: 64px;
+  width: 100%;
+  background: #242424;
+}
+
+.body {
+  height: calc(100vh - 100px);
+  width: 100%;
+}
+
+footer {
+  height: 50px;
+  width: 100%;
+  background: #282c34;
+}

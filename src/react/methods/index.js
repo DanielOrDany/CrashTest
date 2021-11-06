@@ -30,7 +30,7 @@ export const
                 resolve(result.data);
             });
         });
-    }
+    },
 
     createTest = async (name) => {
         return new Promise(resolve => {
@@ -39,7 +39,7 @@ export const
                 resolve(result.data);
             });
         });
-    }
+    },
 
     updateTest = async (id, newName) => {
         return new Promise(resolve => {
@@ -48,7 +48,7 @@ export const
                 resolve(result.data);
             });
         });
-    }
+    },
 
     deleteTest = async (id) => {
         return new Promise(resolve => {
@@ -57,7 +57,7 @@ export const
                 resolve(result.data);
             });
         });
-    }
+    },
 
     findByID = async (id) => {
         return new Promise(resolve => {
@@ -66,7 +66,7 @@ export const
                 resolve(result.data);
             });
         });
-    }
+    },
 
     getAllTests = async () => {
         return new Promise(resolve => {

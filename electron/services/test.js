@@ -51,7 +51,40 @@ async function deleteTest(id) {}
 
 async function findTestByID(id) {}
 
-async function getAllTests() {}
+async function getAllTests() {
+    return [
+        {
+            id: 1,
+            name: "Auction777 API test",
+            ip: "197.0.0.1",
+            created_at: new Date().getTime()
+        },
+        {
+            id: 2,
+            name: "Facebook crash test",
+            ip: "197.0.245.3",
+            created_at: new Date().getTime()
+        },
+        {
+            id: 3,
+            name: "HelloBeer API loading",
+            ip: "197.213.0.8",
+            created_at: new Date().getTime()
+        },
+        {
+            id: 4,
+            name: "IFC API",
+            ip: "197.32.9.1",
+            created_at: new Date().getTime()
+        },
+        {
+            id: 5,
+            name: "LVIV-CITY API test",
+            ip: "207.3.0.1",
+            created_at: new Date().getTime()
+        }
+    ];
+}
 
 // Export test methods
 module.exports = {

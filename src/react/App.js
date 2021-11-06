@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { getAllDatabase } from './methods';
+import { getAllTests } from './methods';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
@@ -13,38 +13,41 @@ class App extends React.Component {
     };
 
     async componentDidMount() {
-      let body = document.getElementsByTagName("body");
-      const theme = localStorage.getItem("theme");
-      const currentConnection = JSON.parse(localStorage.getItem("current_connection"));
-      const dataBase = await getAllDatabase();
+      const tests = await getAllTests();
 
-      console.log("dataBase", dataBase);
+      console.log("tests", tests);
 
-      if (currentConnection) {
-          if (!navigator.onLine) {
-              const hostname = currentConnection.URI.others.host;
-              if (hostname && !hostname.includes("localhost") &&
-                  !hostname.includes("127.0.0.1")) {
-                  window.location.pathname = '/connections';
-                  localStorage.removeItem("current_connection");
-              }
-          }
-      }
-
-      if (theme) {
-          body[0].style.color = "#FFFFFF";
-          body[0].style.background = "#363740";
-      } else {
-          body[0].style.color = "#363740";
-          body[0].style.background = "#FFFFFF";
-      }
+      this.setState({
+          tests: tests
+      })
     }
 
 
     render() {
+        const {
+            tests
+        } = this.state;
+
         return (
             <div className="App">
-               works 1
+                <header>
+                </header>
+                <div className="body">
+                    <div className="page-title">
+                    </div>
+                    <div className="tests-list">
+                        tests:
+                        {
+                            tests && tests.map(test => {
+                               return (
+                                   <div>{test.name}</div>
+                               );
+                            })
+                        }
+                    </div>
+                </div>
+                <footer>
+                </footer>
             </div>
         );
     }
