@@ -3,8 +3,10 @@ const { channels } = require('../src/shared/constants');
 const { autoUpdater } = require('electron-updater');
 const Auth = require('./services/auth');
 const Database = require('./services/database');
+const Test = require('./services/test');
 const path = require('path');
 const url = require('url');
+const { test } = require('shelljs');
 
 let mainWindow;
 
@@ -118,7 +120,7 @@ ipcMain.on(channels.AUTH_VERIFY_TOKEN, async (event, id, token) => {
 });
 
 /**
- *  TEST
+ *  DATABASE
  */
 
 ipcMain.on(channels.GET_DATABASE, async (event) => {
@@ -129,5 +131,64 @@ ipcMain.on(channels.GET_DATABASE, async (event) => {
   } catch (e) {
     unsuccessful.message = e;
     await event.sender.send(channels.GET_DATABASE, unsuccessful);
+  }
+});
+
+/**
+ *  TEST
+ */
+
+ ipcMain.on(channels.CREATE_TEST, async (event, name) => {
+  try {
+    const result = await Test.createNewTest(name);
+    successful.data = result;
+    await event.sender.send(channels.CREATE_TEST, successful);
+  } catch (e) {
+    unsuccessful.message = e;
+    await event.sender.send(channels.CREATE_TEST, unsuccessful);
+  }
+});
+
+ipcMain.on(channels.UPDATE_TEST, async (event, id, newName) => {
+  try {
+    const result = await Test.updateTest(id, newName);
+    successful.data = result;
+    await event.sender.send(channels.UPDATE_TEST, successful);
+  } catch (e) {
+    unsuccessful.message = e;
+    await event.sender.send(channels.UPDATE_TEST, unsuccessful);
+  }
+});
+
+ipcMain.on(channels.DELETE_TEST, async (event, id) => {
+  try {
+    const result = await Test.deleteTest(id);
+    successful.data = result;
+    await event.sender.send(channels.DELETE_TEST, successful);
+  } catch (e) {
+    unsuccessful.message = e;
+    await event.sender.send(channels.DELETE_TEST, unsuccessful);
+  }
+});
+
+ipcMain.on(channels.FIND_ID_TEST, async (event, id) => {
+  try {
+    const result = await Test.findTestByID(id);
+    successful.data = result;
+    await event.sender.send(channels.FIND_ID_TEST, successful);
+  } catch (e) {
+    unsuccessful.message = e;
+    await event.sender.send(channels.FIND_ID_TEST, unsuccessful);
+  }
+});
+
+ipcMain.on(channels.GET_ALL_TESTS, async (event) => {
+  try {
+    const result = await Test.getAllTests();
+    successful.data = result;
+    await event.sender.send(channels.GET_ALL_TESTS, successful);
+  } catch (e) {
+    unsuccessful.message = e;
+    await event.sender.send(channels.GET_ALL_TESTS, unsuccessful);
   }
 });
