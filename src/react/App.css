@@ -74,12 +74,6 @@ footer {
   background: #282c34;
 }
 
-.home-icon {
-width: 32px;
-height: 32px;
-font-size: 35px;
-}
-
 .button {
 height: 50px;
 width: 230px;
@@ -101,50 +95,12 @@ border-radius: 6px 6px 6px 6px;
   background-color: #4ba84f;
 }
 
-.flex-container-1 {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  font-family: Roboto;
-  font-size: 28px;
-  font-weight: 500;
-  height: 73px;
-}
-
-
-.flex-container {
-  display: flex;
-  background-color: #F8F8FA;
-  flex-direction: row;
-}
-
-.flex-container0 {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-container0 > div {
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-  font-family: Roboto;
-  line-height: 16px;
-  height: 45px;
-}
-
-.flex-container0:hover {
-  background-color:#F8F8FA;
-  color: #4ba84f;
-}
-
-
-.flex-container > div {
-  width: 100%;
-  font-family: Roboto;
-  text-align: center;
-  font-size: 14px;
-  line-height: 16px;
-  height: 45px;
+#home-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 35px;
+  margin-left: 15px;
+  cursor: pointer;
 }
 
 .vector-icon {
