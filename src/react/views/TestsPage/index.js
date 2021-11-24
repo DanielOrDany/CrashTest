@@ -44,16 +44,14 @@ class Tests extends React.Component {
                 <table className="tests">
                     <tr>
                         <th>Name</th>
-                        <th>IP</th>
-                        <th>ID</th>
-                        <th>Created at</th>
+                        <th>IP address</th>
+                        <th>Created</th>
                     </tr>
                     {
                         tests && tests.map(test =>
                             <tr>
                                 <td>{test.name}</td>
                                 <td>{test.ip}</td>
-                                <td>{test.id}</td>
                                 <td>{new Date(test.created_at).toLocaleString()}</td>
                             </tr>
                         )

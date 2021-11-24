@@ -1,33 +1,76 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { useAlert } from "react-alert";
 import { createTest } from '../../methods';
 import './page.css';
+
+// const Test = () => {
+//     const alert = useAlert();
+//
+//     return (
+//         <Fragment>
+//             <button
+//                 onClick={() => {
+//                     alert.show("Oh look, an alert!");
+//                 }}
+//             >
+//                 Show Alert
+//             </button>
+//             <button
+//                 onClick={() => {
+//                     alert.error("You just broke something!");
+//                 }}
+//             >
+//                 Oops, an error
+//             </button>
+//             <button
+//                 onClick={() => {
+//                     alert.success("It's ok now!");
+//                 }}
+//             >
+//                 Success!
+//             </button>
+//         </Fragment>
+//     );
+// };
+//
+// export default Test;
 
 class Test extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: ''};
-    
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }
-    
-      handleChange(event) {
-        this.setState({value: event.target.value});
-      }
-    
-      handleSubmit(event) {
-        alert('Ім\'я, що було надіслано: ' + this.state.value);
-        event.preventDefault();
-      }
-    async componentDidMount() {
-        const tests = await createTest();
 
-        console.log("tests", tests);
+        this.createTest = this.createTest.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+    }
+
+    handleNameChange(event) {
+        this.setState({
+            testName: event.target.value
+        });
+    }
+
+    async createTest() {
+        console.log(this.state.testName);
+        if (this.state.testName.replace(/\s/g, '').length > 0) {
+            await createTest(this.state.testName);
+
+            this.setState({
+                testName: ''
+            });
+
+            window.location.hash = `#/tests`;
+        } else {
+            const alert = useAlert();
+            alert.show("Name cannot be empty string.");
+        }
+    }
+
+    async componentDidMount() {
 
         this.setState({
-            tests: tests
-        })
+            testName: ''
+        });
     }
 
     back() {
@@ -35,17 +78,17 @@ class Test extends React.Component {
     }
 
     render() {
+        const state = this.state;
+
         return (
             <div className="test-page">
-                Test page
+                <h2>Test page</h2>
                 <button onClick={() => this.back()}>Go back</button>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                    Ім'я:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Надіслати" />
-                </form>
+                <div>
+                    <label>Test name:</label>
+                    <input type="text" value={state && state.testName} onChange={(e) => this.handleNameChange(e)} />
+                    <button onClick={() => this.createTest()}>Create</button>
+                </div>
             </div>
         );
     }

@@ -4,6 +4,7 @@ const FileSync = require('lowdb/adapters/FileSync');
 const appDataDirPath = getAppDataPath();
 const adapter = new FileSync(path.join(appDataDirPath, 'crash_test_db.json'));
 const database = low(adapter);
+const { generateRandomIdByPattern } = require("../helpers");
 
 function getAppDataPath() {
     switch (process.platform) {
@@ -26,25 +27,16 @@ function getAppDataPath() {
 async function createTest(name) {
 
     // Get all connections from the app storage
-    const tests = await database
-        .get('tests')
-        .value();
-
-    function randomAlphaNumeric () {
-        return Math.random().toString(36).charAt(2);
-    };
-    
-    function idRandomPattern (pattern) {
-        pattern = pattern.split('');
-        return pattern.map(x => x.replace('x', randomAlphaNumeric())).join('');
-    };
+    const tests = await getAllTests();
     
     // Remove one of them by name
     tests.push({
-        id: idRandomPattern('xxx-xxx'),
+        id: generateRandomIdByPattern('xxx-xxx'),
         name: name,
         created_at: new Date().getTime()
     });
+
+    console.log("new tests:", tests);
 
     // & update connections after
     database.get('tests')
@@ -55,29 +47,36 @@ async function createTest(name) {
 }
 
 async function updateTest(id, newName) {
-    tests.id = id;
-    database.get('tests')
+    await database.get('tests')
         .find({id: id})
+        .read()
         .assign({'name': newName})
         .write();
+
+    return await findTestByID(id);
 }
 
 async function deleteTest(id) {
-    tests.id = id;
-    database.get('tests')
+    await database.get('tests')
+        .read()
         .find({id: id})
         .unset('tests')
         .write();
+
+    return await getAllTests();
 }    
 
 async function findTestByID(id) {
-    tests.id = id;
-    database.get('tests')
+    const test = await database.read().get('tests')
         .find({id: id})
-        .write();
+        .value();
+
+    return test;
 }
 
 async function getAllTests() {
+    const tests = await database.read().get('tests').value();
+    console.log("tests:", tests);
     return tests;
 }
 

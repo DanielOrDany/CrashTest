@@ -140,7 +140,8 @@ ipcMain.on(channels.GET_DATABASE, async (event) => {
 
  ipcMain.on(channels.CREATE_TEST, async (event, name) => {
   try {
-    const result = await Test.createNewTest(name);
+    console.log(name);
+    const result = await Test.createTest(name);
     successful.data = result;
     await event.sender.send(channels.CREATE_TEST, successful);
   } catch (e) {

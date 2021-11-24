@@ -27,6 +27,8 @@
     "pretty-checkbox": "^3.0.3",
     "rc-menu": "^7.5.4",
     "react": "^16.8.6",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-arrows": "^1.2.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-contextmenu": "^2.13.0",

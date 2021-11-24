@@ -33,6 +33,7 @@ export const
     },
 
     createTest = async (name) => {
+        console.log(name);
         return new Promise(resolve => {
             ipcRenderer.send(channels.CREATE_TEST, name);
             ipcRenderer.on(channels.CREATE_TEST, (event, result) => {

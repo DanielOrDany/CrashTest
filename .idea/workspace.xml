@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="317050a3-5d1a-4cf1-88ba-a62ad2023157" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/react/views/TestPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/react/views/TestsPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/react/views/TestsPage/page.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/react/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/react/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/react/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/react/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/react/views/Tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/react/views/TestPage/page.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +25,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../QuickQuery" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Volpis" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -70,7 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1636200473246</updated>
       <workItem from="1636200476497" duration="3925000" />
-      <workItem from="1637440137757" duration="5233000" />
+      <workItem from="1637440137757" duration="5546000" />
     </task>
     <servers />
   </component>
