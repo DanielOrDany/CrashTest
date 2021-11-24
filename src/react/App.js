@@ -10,9 +10,6 @@ import TestPage from "./views/TestPage";
 import TestsPage from "./views/TestsPage";
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    };
 
     async componentDidMount() {
         window.location.hash = `#/tests`;

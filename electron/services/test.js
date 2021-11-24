@@ -23,16 +23,25 @@ function getAppDataPath() {
     }
 }
 
-async function createNewTest(name) {
+async function createTest(name) {
 
     // Get all connections from the app storage
     const tests = await database
         .get('tests')
         .value();
 
+    function randomAlphaNumeric () {
+        return Math.random().toString(36).charAt(2);
+    };
+    
+    function idRandomPattern (pattern) {
+        pattern = pattern.split('');
+        return pattern.map(x => x.replace('x', randomAlphaNumeric())).join('');
+    };
+    
     // Remove one of them by name
     tests.push({
-        id: tests.length + 1,
+        id: idRandomPattern('xxx-xxx'),
         name: name,
         created_at: new Date().getTime()
     });
@@ -45,50 +54,36 @@ async function createNewTest(name) {
     return tests;
 }
 
-async function updateTest(id, newName) {}
+async function updateTest(id, newName) {
+    tests.id = id;
+    database.get('tests')
+        .find({id: id})
+        .assign({'name': newName})
+        .write();
+}
 
-async function deleteTest(id) {}
+async function deleteTest(id) {
+    tests.id = id;
+    database.get('tests')
+        .find({id: id})
+        .unset('tests')
+        .write();
+}    
 
-async function findTestByID(id) {}
+async function findTestByID(id) {
+    tests.id = id;
+    database.get('tests')
+        .find({id: id})
+        .write();
+}
 
 async function getAllTests() {
-    return [
-        {
-            id: 1,
-            name: "Auction777 API test",
-            ip: "197.0.0.1",
-            created_at: new Date().getTime()
-        },
-        {
-            id: 2,
-            name: "Facebook crash test",
-            ip: "197.0.245.3",
-            created_at: new Date().getTime()
-        },
-        {
-            id: 3,
-            name: "HelloBeer API loading",
-            ip: "197.213.0.8",
-            created_at: new Date().getTime()
-        },
-        {
-            id: 4,
-            name: "IFC API",
-            ip: "197.32.9.1",
-            created_at: new Date().getTime()
-        },
-        {
-            id: 5,
-            name: "LVIV-CITY API test",
-            ip: "207.3.0.1",
-            created_at: new Date().getTime()
-        }
-    ];
+    return tests;
 }
 
 // Export test methods
 module.exports = {
-    createNewTest,
+    createTest,
     updateTest,
     deleteTest,
     findTestByID,
