@@ -15,8 +15,6 @@ class Tests extends React.Component {
     async componentDidMount() {
         const tests = await getAllTests();
 
-        console.log("tests", tests);
-
         this.setState({
             tests: tests
         })

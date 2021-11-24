@@ -1,39 +1,7 @@
-import React, { Fragment } from 'react';
-import { useAlert } from "react-alert";
+import React from 'react';
+import { toast } from 'react-toastify';
 import { createTest } from '../../methods';
 import './page.css';
-
-// const Test = () => {
-//     const alert = useAlert();
-//
-//     return (
-//         <Fragment>
-//             <button
-//                 onClick={() => {
-//                     alert.show("Oh look, an alert!");
-//                 }}
-//             >
-//                 Show Alert
-//             </button>
-//             <button
-//                 onClick={() => {
-//                     alert.error("You just broke something!");
-//                 }}
-//             >
-//                 Oops, an error
-//             </button>
-//             <button
-//                 onClick={() => {
-//                     alert.success("It's ok now!");
-//                 }}
-//             >
-//                 Success!
-//             </button>
-//         </Fragment>
-//     );
-// };
-//
-// export default Test;
 
 class Test extends React.Component {
 
@@ -51,23 +19,24 @@ class Test extends React.Component {
     }
 
     async createTest() {
-        console.log(this.state.testName);
         if (this.state.testName.replace(/\s/g, '').length > 0) {
-            await createTest(this.state.testName);
+            const newTest = await createTest(this.state.testName);
 
-            this.setState({
-                testName: ''
-            });
+            if (Object.keys(newTest).length === 0) { // case: when test with the same name already exists
+                toast.dark('🦄 Sorry, test with such name already exists!', {});
+            } else {
+                this.setState({
+                    testName: ''
+                });
 
-            window.location.hash = `#/tests`;
+                window.location.hash = `#/tests`;
+            }
         } else {
-            const alert = useAlert();
-            alert.show("Name cannot be empty string.");
+            toast.dark('🦄 Wow so easy!', {});
         }
     }
 
     async componentDidMount() {
-
         this.setState({
             testName: ''
         });

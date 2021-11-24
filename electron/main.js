@@ -17,6 +17,7 @@ let successful = {
 
 let unsuccessful = {
   success: false,
+  data: {},
   message: ""
 };
 
@@ -138,13 +139,14 @@ ipcMain.on(channels.GET_DATABASE, async (event) => {
  *  TEST
  */
 
- ipcMain.on(channels.CREATE_TEST, async (event, name) => {
+ipcMain.on(channels.CREATE_TEST, async (event, name) => {
   try {
     console.log(name);
     const result = await Test.createTest(name);
     successful.data = result;
     await event.sender.send(channels.CREATE_TEST, successful);
   } catch (e) {
+    console.log(e);
     unsuccessful.message = e;
     await event.sender.send(channels.CREATE_TEST, unsuccessful);
   }
