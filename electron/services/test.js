@@ -25,25 +25,30 @@ function getAppDataPath() {
 }
 
 async function createTest(name) {
+    const existedTestWithSameName = await findTestByName(name);
+    console.log(existedTestWithSameName);
+    if (existedTestWithSameName) {
+        throw "Test with such name already exists!";
+    } else {
+        // Get all connections from the app storage
+        const tests = await getAllTests();
 
-    // Get all connections from the app storage
-    const tests = await getAllTests();
-    
-    // Remove one of them by name
-    tests.push({
-        id: generateRandomIdByPattern('xxx-xxx'),
-        name: name,
-        created_at: new Date().getTime()
-    });
+        // Remove one of them by name
+        tests.push({
+            id: generateRandomIdByPattern('xxx-xxx'),
+            name: name,
+            created_at: new Date().getTime()
+        });
 
-    console.log("new tests:", tests);
+        console.log("new tests:", tests);
 
-    // & update connections after
-    database.get('tests')
-        .assign({ tests })
-        .write();
+        // & update connections after
+        database.get('tests')
+            .assign({ tests })
+            .write();
 
-    return tests;
+        return tests;
+    }
 }
 
 async function updateTest(id, newName) {
@@ -69,6 +74,14 @@ async function deleteTest(id) {
 async function findTestByID(id) {
     const test = await database.read().get('tests')
         .find({id: id})
+        .value();
+
+    return test;
+}
+
+async function findTestByName(name) {
+    const test = await database.read().get('tests')
+        .find({name: name})
         .value();
 
     return test;

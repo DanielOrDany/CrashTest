@@ -3,6 +3,10 @@
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    height: calc(100vh - 253px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
 }
 
 .tests td, .tests th {
